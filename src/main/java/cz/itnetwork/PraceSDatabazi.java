@@ -91,21 +91,21 @@ public class PraceSDatabazi {
         }
         // Získání telefonního čísla od uživatele, kontrola správného formátu čísla
         //  a zachycení vyjímky při získávání dat od uživatele
-        int telefoniCislo = -1;
+        int telefonniCislo = -1;
         System.out.println("Zadejte telefonní číslo pojištěnce(ve tvaru 123456789):  ");
-        while (telefoniCislo == -1) {
+        while (telefonniCislo == -1) {
             try {
-                telefoniCislo = Integer.parseInt(sc.nextLine());
-                while ((telefoniCislo > 999999999)  || (telefoniCislo < 100000000)) {
+                telefonniCislo = Integer.parseInt(sc.nextLine());
+                while ((telefonniCislo > 999999999)  || (telefonniCislo < 100000000)) {
                     System.out.println("Zadané telefonní číslo nebylo ve formátu 123456789. Zadejte ho prosím znovu.");
-                    telefoniCislo = Integer.parseInt(sc.nextLine());
+                    telefonniCislo = Integer.parseInt(sc.nextLine());
                 }
             } catch (Exception e) {
                 System.out.println("Zadané telefonní číslo nebylo ve formátu 123456789. Zadejte ho prosím znovu");
             }
         }
         // Uložení nového pojištěnce do seznamu
-        seznamPojistenych.add(new Pojistenec(jmeno, prijmeni, vek, telefoniCislo));
+        seznamPojistenych.add(new Pojistenec(jmeno, prijmeni, vek, telefonniCislo));
         System.out.println("Pojištěnec byl uložen");
     }
 

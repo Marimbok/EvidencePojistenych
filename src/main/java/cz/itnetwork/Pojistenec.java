@@ -1,18 +1,37 @@
 package cz.itnetwork;
 
+/**
+ * Třída reprezentující pojištěnce
+ */
 public class Pojistenec {
-    private String jmeno;
-    private String prijmeni;
-    private int vek;
-    private int telefoniCislo;
 
-    public Pojistenec(String jmeno, String prijmeni, int vek, int telefoniCislo) {
+    // Atribut jména pojištěnce
+    private String jmeno;
+
+    // Atribut přijmení pojištěnce
+    private String prijmeni;
+
+    // Atribut věku pojištěnce
+    private int vek;
+
+    // Atribut telefonního čísla pojistence
+    private int telefonniCislo;
+
+    /**
+     * Konstrukto třídy
+     * @param jmeno Jméno pojištěnce
+     * @param prijmeni Přijmení pojištěnce
+     * @param vek Věk pojištěnce
+     * @param telefonniCislo Telefonní číslo pojištěnce
+     */
+    public Pojistenec(String jmeno, String prijmeni, int vek, int telefonniCislo) {
         this.jmeno = jmeno;
         this.prijmeni = prijmeni;
         this.vek = vek;
-        this.telefoniCislo = telefoniCislo;
+        this.telefonniCislo = telefonniCislo;
     }
 
+    // Začátek Getterů a Setterů
     public String getJmeno() {
         return jmeno;
     }
@@ -37,16 +56,21 @@ public class Pojistenec {
         this.vek = vek;
     }
 
-    public int getTelefoniCislo() {
-        return telefoniCislo;
+    public int getTelefonniCislo() {
+        return telefonniCislo;
     }
 
-    public void setTelefoniCislo(int telefoniCislo) {
-        this.telefoniCislo = telefoniCislo;
+    public void setTelefonniCislo(int telefonniCislo) {
+        this.telefonniCislo = telefonniCislo;
     }
+    // Konec Getterů a Setterů
 
+    /**
+     * Override metody toString.
+     * @return   V jednom řádku vrací všechny informace o pojistenci
+     */
     @Override
     public String toString(){
-        return String.format(getJmeno() + " " + getPrijmeni() + " " + getVek() + " " + getTelefoniCislo());
+        return String.format(getJmeno() + " " + getPrijmeni() + " " + getVek() + " " + getTelefonniCislo());
     }
 }
