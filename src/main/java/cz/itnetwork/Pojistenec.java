@@ -15,7 +15,7 @@ public class Pojistenec {
     private int vek;
 
     // Atribut telefonního čísla pojistence
-    private int telefonniCislo;
+    private String telefonniCislo;
 
     /**
      * Konstrukto třídy
@@ -24,7 +24,7 @@ public class Pojistenec {
      * @param vek Věk pojištěnce
      * @param telefonniCislo Telefonní číslo pojištěnce
      */
-    public Pojistenec(String jmeno, String prijmeni, int vek, int telefonniCislo) {
+    public Pojistenec(String jmeno, String prijmeni, int vek, String telefonniCislo) {
         this.jmeno = jmeno;
         this.prijmeni = prijmeni;
         this.vek = vek;
@@ -56,18 +56,18 @@ public class Pojistenec {
         this.vek = vek;
     }
 
-    public int getTelefonniCislo() {
+    public String getTelefonniCislo() {
         return telefonniCislo;
     }
 
-    public void setTelefonniCislo(int telefonniCislo) {
+    public void setTelefonniCislo(String telefonniCislo) {
         this.telefonniCislo = telefonniCislo;
     }
     // Konec Getterů a Setterů
 
     /**
      * Override metody toString.
-     * @return   V jednom řádku vrací všechny informace o pojistenci
+     * @return V jednom řádku vrací všechny informace o pojistenci
      */
     @Override
     public String toString(){

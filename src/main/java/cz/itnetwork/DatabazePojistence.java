@@ -3,47 +3,15 @@ package cz.itnetwork;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class PraceSDatabazi {
+public class DatabazePojistence {
 
     Scanner sc = new Scanner(System.in);
+
     /**
      * Seznam, do kterého se ukládájí pojištěnci
      */
     private ArrayList<Pojistenec> seznamPojistenych = new ArrayList<>();
 
-    /**
-     * Základní metoda, která drží program v běhu, dokud ji uživatel neukončí.
-     * Využívá cyklus while a switch.
-     */
-    public void program() {
-        String prikaz = "0";
-        while (!prikaz.equals("4")) {
-            vypisMenu();
-            System.out.println("------------------------------------------------------");
-            prikaz = sc.nextLine();
-            switch (prikaz){
-                case "1":
-                    pridejZaznam();
-                    break;
-
-                case "2":
-                    vypisZaznam();
-                    break;
-
-                case "3":
-                    vyhledejZaznam();
-                    break;
-
-                case "4":
-                    System.out.println("Děkuji za využití naší evidence");
-                    break;
-
-                default:
-                    System.out.println("Zadal jsi neznámou akci. Zadej ji prosím znovu");
-                    break;
-            }
-        }
-    }
 
     /**
      * Pro vypsání uživatelsky přívětivého menu a možností, které uživatel může provést
@@ -89,20 +57,11 @@ public class PraceSDatabazi {
                 System.out.println("Musíte zadat číslo. Zkuste ho prosím zadat znovu");
             }
         }
-        // Získání telefonního čísla od uživatele, kontrola správného formátu čísla
-        //  a zachycení vyjímky při získávání dat od uživatele
-        int telefonniCislo = -1;
-        System.out.println("Zadejte telefonní číslo pojištěnce(ve tvaru 123456789):  ");
-        while (telefonniCislo == -1) {
-            try {
-                telefonniCislo = Integer.parseInt(sc.nextLine());
-                while ((telefonniCislo > 999999999)  || (telefonniCislo < 100000000)) {
-                    System.out.println("Zadané telefonní číslo nebylo ve formátu 123456789. Zadejte ho prosím znovu.");
-                    telefonniCislo = Integer.parseInt(sc.nextLine());
-                }
-            } catch (Exception e) {
-                System.out.println("Zadané telefonní číslo nebylo ve formátu 123456789. Zadejte ho prosím znovu");
-            }
+        // Získání telefonního čísla od uživatele a kontrola správného formátu.
+        System.out.println("Zadejte telefonní číslo ve tvaru 123456789: ");
+        String telefonniCislo = sc.nextLine();
+        while (!zkontrolujTelefonniCislo(telefonniCislo)) {
+            telefonniCislo = sc.nextLine();
         }
         // Uložení nového pojištěnce do seznamu
         seznamPojistenych.add(new Pojistenec(jmeno, prijmeni, vek, telefonniCislo));
@@ -122,7 +81,7 @@ public class PraceSDatabazi {
     }
 
     /**
-     * Metoda pro nalezení pojistence v seznamu pojistencu za pomocí jména a příjmení
+     * Metoda pro nalezení pojištence v seznamu pojištěnců za pomocí jména a příjmení
      */
     public void vyhledejZaznam() {
         System.out.println("------------------------------------------------------");
@@ -152,11 +111,37 @@ public class PraceSDatabazi {
         for (Pojistenec pojistenec : seznamPojistenych) {
             if ((pojistenec.getJmeno().equals(jmeno)) && (pojistenec.getPrijmeni().equals(prijmeni))) {
                 nalezenyPojistenec = pojistenec;
+                System.out.println(nalezenyPojistenec);
             }
-            System.out.println(nalezenyPojistenec);
+
         }
         if (nalezenyPojistenec == null) {
-            System.out.println("Tento pojistenec není v databázi");
+            System.out.println("Tento pojištěnec není v databázi");
+        }
+    }
+
+    /**
+     * Metoda pro kontrolu správného formátu telefonního čísla. Číslo musí být ve formátu 123456789.
+     * @param telefonniCislo Telefonní číslo zadané uživatelem
+     * @return  Vrátí true pokud je telefonní číslo ve správném formátu. Jinak vráti false
+     */
+    public boolean zkontrolujTelefonniCislo (String telefonniCislo) {
+        telefonniCislo = telefonniCislo.trim();
+        try {
+            if (telefonniCislo.length() == 9) {
+                for (char znak : telefonniCislo.toCharArray()) {
+                    int hodnotaAscii = (int) znak;
+                    if ((hodnotaAscii < 47) || (hodnotaAscii > 58)) {
+                        throw new IllegalArgumentException("Špatný formát telefonního čísla");
+                    }
+                }
+            } else {
+                throw new IllegalArgumentException("Špatný formát telefonního čísla");
+            }
+            return true;
+        } catch (Exception e) {
+            System.out.println("Špatný formát telefonního čísla. Zadejte ho prosím bez mezer ve formátu 123456789");
+            return false;
         }
     }
 }
