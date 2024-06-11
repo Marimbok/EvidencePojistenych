@@ -1,1 +1,1 @@
-Projekt je připravený pro hodnocení
+Konzolová aplikace v Javě na evidenci pojištěnců
